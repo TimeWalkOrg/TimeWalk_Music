@@ -21,7 +21,7 @@ export default function PlaylistGenerator() {
     try {
       const parsed = parseInput(input);
       if (!parsed) {
-        setError('Please use format: "1776, New York" or "New York, 1776"');
+        setError('Please use format: 1776, New York or New York, 1776');
         setIsLoading(false);
         return;
       }
@@ -31,7 +31,7 @@ export default function PlaylistGenerator() {
 
       const result = generatePlaylist(parsed.year, parsed.location);
       setPlaylist(result);
-    } catch (err) {
+    } catch {
       setError('Failed to generate playlist. Please try again.');
     } finally {
       setIsLoading(false);
@@ -79,7 +79,7 @@ export default function PlaylistGenerator() {
             </button>
           </div>
           <p className="text-sm text-gray-500">
-            Try: "1664, New Amsterdam", "1950 America", "1890 London", or "2020 Global"
+            Try: &ldquo;1664, New Amsterdam&rdquo;, &ldquo;1950 America&rdquo;, &ldquo;1890 London&rdquo;, or &ldquo;2020 Global&rdquo;
           </p>
         </div>
 
