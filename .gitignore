@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Google Sheets API credentials
+*service-account*.json
+google-credentials.json
+
 # vercel
 .vercel
 

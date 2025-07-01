@@ -6,12 +6,17 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync-to-sheets": "node scripts/sync-to-sheets.js",
+    "sync-from-sheets": "node scripts/sync-from-sheets.js",
+    "test-sheets": "node scripts/test-connection.js"
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.4"
+    "next": "15.3.4",
+    "googleapis": "^144.0.0",
+    "google-auth-library": "^9.4.1"
   },
   "devDependencies": {
     "typescript": "^5",
