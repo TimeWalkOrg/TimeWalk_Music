@@ -1,17 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { generatePlaylist, parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
+import { generatePlaylist, PlaylistResult, Song } from '@/lib/playlistGenerator';
 
 export default function PlaylistGenerator() {
-  const [input, setInput] = useState('');
+  const [year, setYear] = useState('');
+  const [location, setLocation] = useState('');
   const [playlist, setPlaylist] = useState<PlaylistResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleGenerate = async () => {
-    if (!input.trim()) {
-      setError('Please enter a year and location');
+    if (!year.trim() || !location.trim()) {
+      setError('Please enter both year and location');
+      return;
+    }
+
+    const yearNum = parseInt(year);
+    if (isNaN(yearNum) || yearNum < 1000 || yearNum > 2100) {
+      setError('Please enter a valid year (1000-2100)');
       return;
     }
 
@@ -19,17 +26,10 @@ export default function PlaylistGenerator() {
     setError('');
 
     try {
-      const parsed = parseInput(input);
-      if (!parsed) {
-        setError('Please use format: 1776, New York or New York, 1776');
-        setIsLoading(false);
-        return;
-      }
-
       // Simulate a brief loading period for better UX
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      const result = generatePlaylist(parsed.year, parsed.location);
+      const result = generatePlaylist(yearNum, location.trim());
       setPlaylist(result);
     } catch {
       setError('Failed to generate playlist. Please try again.');
@@ -56,30 +56,52 @@ export default function PlaylistGenerator() {
 
       {/* Input Section */}
       <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-        <div className="space-y-2">
-          <label htmlFor="input" className="block text-sm font-medium text-gray-700">
-            Enter Year and Location
-          </label>
-          <div className="flex space-x-3">
-            <input
-              id="input"
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="e.g., 1776, New York or 1960 London"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
+                Year
+              </label>
+              <input
+                id="year"
+                type="number"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                onFocus={(e) => e.target.placeholder = ''}
+                onBlur={(e) => e.target.placeholder = 'e.g., 1776'}
+                onKeyPress={handleKeyPress}
+                placeholder="e.g., 1776"
+                className="w-full px-4 py-2 text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
+              />
+            </div>
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                Location
+              </label>
+              <input
+                id="location"
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                onFocus={(e) => e.target.placeholder = ''}
+                onBlur={(e) => e.target.placeholder = 'e.g., New York'}
+                onKeyPress={handleKeyPress}
+                placeholder="e.g., New York"
+                className="w-full px-4 py-2 text-gray-900 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
+              />
+            </div>
+          </div>
+          <div className="flex justify-center">
             <button
               onClick={handleGenerate}
               disabled={isLoading}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {isLoading ? 'Generating...' : 'Generate'}
+              {isLoading ? 'Generating...' : 'Generate Playlist'}
             </button>
           </div>
-          <p className="text-sm text-gray-500">
-            Try: &ldquo;1664, New Amsterdam&rdquo;, &ldquo;1950 America&rdquo;, &ldquo;1890 London&rdquo;, or &ldquo;2020 Global&rdquo;
+          <p className="text-sm text-gray-500 text-center">
+            Try: 1664 + New Amsterdam, 1950 + America, 1890 + London, or 2020 + Global
           </p>
         </div>
 
@@ -122,19 +144,22 @@ export default function PlaylistGenerator() {
           <h3 className="text-lg font-medium text-gray-900 mb-4">Try these examples:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              '1664, New Amsterdam',
-              '1776, America',
-              '1890, London',
-              '1930, New York',
-              '1950, America',
-              '2020, Global'
+              { year: '1664', location: 'New Amsterdam' },
+              { year: '1776', location: 'America' },
+              { year: '1890', location: 'London' },
+              { year: '1930', location: 'New York' },
+              { year: '1950', location: 'America' },
+              { year: '2020', location: 'Global' }
             ].map((example) => (
               <button
-                key={example}
-                onClick={() => setInput(example)}
+                key={`${example.year}-${example.location}`}
+                onClick={() => {
+                  setYear(example.year);
+                  setLocation(example.location);
+                }}
                 className="text-left p-3 bg-white rounded border hover:bg-gray-50 transition-colors"
               >
-                <span className="text-blue-600 font-medium">{example}</span>
+                <span className="text-blue-600 font-medium">{example.year}, {example.location}</span>
               </button>
             ))}
           </div>
