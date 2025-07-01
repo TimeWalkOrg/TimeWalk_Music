@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "title": "Greensleeves",
+    "artist": "Anonymous",
+    "year": 1660,
+    "genre": "Renaissance/Ballad",
+    "cultural_region": "England",
+    "historical_significance": "Popular ballad during the Elizabethan era, reflects early colonial musical tastes"
+  },
+  {
+    "id": 2,
+    "title": "Barbara Allen",
+    "artist": "Traditional",
+    "year": 1665,
+    "genre": "Folk Ballad",
+    "cultural_region": "British Isles",
+    "historical_significance": "Traditional ballad brought to American colonies"
+  },
+  {
+    "id": 3,
+    "title": "The Liberty Song",
+    "artist": "John Dickinson",
+    "year": 1768,
+    "genre": "Patriotic",
+    "cultural_region": "American Colonies",
+    "historical_significance": "One of the first American patriotic songs, pre-Revolution"
+  },
+  {
+    "id": 4,
+    "title": "Yankee Doodle",
+    "artist": "Traditional",
+    "year": 1776,
+    "genre": "Patriotic/Folk",
+    "cultural_region": "America",
+    "historical_significance": "Revolutionary War era song, symbol of American independence"
+  },
+  {
+    "id": 5,
+    "title": "The Battle Hymn of the Republic",
+    "artist": "Julia Ward Howe",
+    "year": 1861,
+    "genre": "Patriotic/Hymn",
+    "cultural_region": "America",
+    "historical_significance": "Civil War era anthem"
+  },
+  {
+    "id": 6,
+    "title": "After the Ball",
+    "artist": "Charles K. Harris",
+    "year": 1892,
+    "genre": "Popular/Waltz",
+    "cultural_region": "America",
+    "historical_significance": "One of the first million-selling popular songs"
+  },
+  {
+    "id": 7,
+    "title": "Maple Leaf Rag",
+    "artist": "Scott Joplin",
+    "year": 1899,
+    "genre": "Ragtime",
+    "cultural_region": "America",
+    "historical_significance": "Defining piece of the ragtime era"
+  },
+  {
+    "id": 8,
+    "title": "Alexander's Ragtime Band",
+    "artist": "Irving Berlin",
+    "year": 1911,
+    "genre": "Ragtime/Popular",
+    "cultural_region": "America",
+    "historical_significance": "Bridged ragtime and modern popular music"
+  },
+  {
+    "id": 9,
+    "title": "Ain't She Sweet",
+    "artist": "Ben Bernie",
+    "year": 1927,
+    "genre": "Jazz",
+    "cultural_region": "America",
+    "historical_significance": "Jazz Age standard"
+  },
+  {
+    "id": 10,
+    "title": "Brother, Can You Spare a Dime?",
+    "artist": "Bing Crosby",
+    "year": 1932,
+    "genre": "Popular/Jazz",
+    "cultural_region": "America",
+    "historical_significance": "Great Depression era anthem"
+  },
+  {
+    "id": 11,
+    "title": "White Christmas",
+    "artist": "Irving Berlin",
+    "year": 1942,
+    "genre": "Popular/Holiday",
+    "cultural_region": "America",
+    "historical_significance": "WWII era classic, most recorded Christmas song"
+  },
+  {
+    "id": 12,
+    "title": "Rock Around the Clock",
+    "artist": "Bill Haley & His Comets",
+    "year": 1954,
+    "genre": "Rock & Roll",
+    "cultural_region": "America",
+    "historical_significance": "Dawn of the rock & roll era"
+  },
+  {
+    "id": 13,
+    "title": "That'll Be the Day",
+    "artist": "Buddy Holly",
+    "year": 1957,
+    "genre": "Rock & Roll",
+    "cultural_region": "America",
+    "historical_significance": "Classic 1950s rock & roll"
+  },
+  {
+    "id": 14,
+    "title": "Blue Suede Shoes",
+    "artist": "Carl Perkins",
+    "year": 1956,
+    "genre": "Rockabilly",
+    "cultural_region": "America",
+    "historical_significance": "Rockabilly classic later covered by Elvis"
+  },
+  {
+    "id": 15,
+    "title": "Imagine",
+    "artist": "John Lennon",
+    "year": 1971,
+    "genre": "Rock/Pop",
+    "cultural_region": "Global",
+    "historical_significance": "Peace anthem of the 1970s"
+  },
+  {
+    "id": 16,
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "year": 1975,
+    "genre": "Rock/Opera",
+    "cultural_region": "Global",
+    "historical_significance": "Revolutionary rock composition"
+  },
+  {
+    "id": 17,
+    "title": "Sweet Child O' Mine",
+    "artist": "Guns N' Roses",
+    "year": 1987,
+    "genre": "Hard Rock",
+    "cultural_region": "Global",
+    "historical_significance": "Iconic 1980s rock anthem"
+  },
+  {
+    "id": 18,
+    "title": "Nirvana - Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "year": 1991,
+    "genre": "Grunge",
+    "cultural_region": "Global",
+    "historical_significance": "Defining song of the grunge movement"
+  },
+  {
+    "id": 19,
+    "title": "Radiohead - Creep",
+    "artist": "Radiohead",
+    "year": 1992,
+    "genre": "Alternative Rock",
+    "cultural_region": "Global",
+    "historical_significance": "Alternative rock classic"
+  },
+  {
+    "id": 20,
+    "title": "Billie Eilish - Bad Guy",
+    "artist": "Billie Eilish",
+    "year": 2019,
+    "genre": "Pop/Electronic",
+    "cultural_region": "Global",
+    "historical_significance": "Gen Z pop icon"
+  },
+  {
+    "id": 21,
+    "title": "The Weeknd - Blinding Lights",
+    "artist": "The Weeknd",
+    "year": 2019,
+    "genre": "Synthpop",
+    "cultural_region": "Global",
+    "historical_significance": "Modern synthwave revival"
+  },
+  {
+    "id": 22,
+    "title": "Olivia Rodrigo - Good 4 U",
+    "artist": "Olivia Rodrigo",
+    "year": 2021,
+    "genre": "Pop Rock",
+    "cultural_region": "Global",
+    "historical_significance": "Post-pandemic pop anthem"
+  },
+  {
+    "id": 23,
+    "title": "Harry Styles - As It Was",
+    "artist": "Harry Styles",
+    "year": 2022,
+    "genre": "Pop",
+    "cultural_region": "Global",
+    "historical_significance": "Contemporary pop ballad"
+  },
+  {
+    "id": 24,
+    "title": "Taylor Swift - Anti-Hero",
+    "artist": "Taylor Swift",
+    "year": 2022,
+    "genre": "Pop",
+    "cultural_region": "Global",
+    "historical_significance": "Modern confessional pop"
+  },
+  {
+    "id": 25,
+    "title": "Future Nostalgia",
+    "artist": "AI Generated Artist",
+    "year": 2025,
+    "genre": "AI-Pop",
+    "cultural_region": "Global",
+    "historical_significance": "Represents the future of AI-assisted music creation"
+  }
+]
