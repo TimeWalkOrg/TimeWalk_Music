@@ -55,7 +55,7 @@ export default function PlaylistGenerator() {
       </div>
 
       {/* Input Section */}
-      <div className="bg-blue-50 rounded-lg shadow-md p-6 space-y-4">
+      <div className="bg-blue-100 rounded-lg shadow-md p-6 space-y-4">
         <div className="space-y-2">
           <label htmlFor="input" className="block text-sm font-medium text-gray-700">
             Enter Year and Location
@@ -118,7 +118,7 @@ export default function PlaylistGenerator() {
 
       {/* Examples Section */}
       {!playlist && (
-        <div className="bg-blue-50 rounded-lg p-6">
+        <div className="bg-blue-100 rounded-lg p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Try these examples:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
