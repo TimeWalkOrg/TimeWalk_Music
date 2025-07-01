@@ -146,11 +146,11 @@ export default function PlaylistGenerator() {
 
 // Helper function to get the best available music link
 function getMusicLink(song: Song): { url: string; platform: string } | null {
-  if (song.spotify_url) {
-    return { url: song.spotify_url, platform: 'Spotify' };
-  }
   if (song.youtube_url) {
     return { url: song.youtube_url, platform: 'YouTube' };
+  }
+  if (song.spotify_url) {
+    return { url: song.spotify_url, platform: 'Spotify' };
   }
   if (song.apple_music_url) {
     return { url: song.apple_music_url, platform: 'Apple Music' };
