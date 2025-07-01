@@ -23,13 +23,19 @@ export interface PlaylistResult {
 
 /**
  * Calculate temporal weight based on distance from query year
+ * Only includes songs that existed before or during the query year
+ * Weights favor more recent songs exponentially (10x more likely for songs 40 years newer)
  */
-function calculateTemporalWeight(songYear: number, queryYear: number, maxDistance: number = 50): number {
-  const distance = Math.abs(songYear - queryYear);
-  if (distance > maxDistance) return 0;
+function calculateTemporalWeight(songYear: number, queryYear: number): number {
+  // Only include songs that existed before or during the query year
+  if (songYear > queryYear) return 0;
   
-  // Exponential decay based on temporal distance
-  return Math.exp(-distance / 20);
+  const yearsBefore = queryYear - songYear;
+  
+  // Exponential decay where songs 40 years older are 10x less likely
+  // Using decay factor of 17.5 to achieve this ratio
+  // Example: for 1700 query, 1690 song is 10x more likely than 1650 song
+  return Math.exp(-yearsBefore / 17.5);
 }
 
 /**
