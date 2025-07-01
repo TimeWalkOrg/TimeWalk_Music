@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ChronoTunes - Historical Music Playlists",
+  title: "Music TimeWalk - Historical Music Playlists",
   description: "Generate music playlists for any year and location in history. Experience the sounds of different eras and places.",
   keywords: ["music", "history", "playlist", "temporal", "historical music"],
 };
