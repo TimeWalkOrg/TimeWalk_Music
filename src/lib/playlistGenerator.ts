@@ -132,8 +132,8 @@ function selectDiversePlaylist(weightedSongs: WeightedSong[], count: number): So
 /**
  * Generate a playlist based on year and location
  */
-export function generatePlaylist(queryYear: number, queryLocation: string): PlaylistResult {
-  const songs: Song[] = songsData;
+export function generatePlaylist(queryYear: number, queryLocation: string, customSongs?: Song[]): PlaylistResult {
+  const songs: Song[] = customSongs || songsData;
   
   // Calculate weights for all songs
   const weightedSongs: WeightedSong[] = songs.map(song => ({
@@ -151,6 +151,26 @@ export function generatePlaylist(queryYear: number, queryLocation: string): Play
     queryLocation,
     generatedAt: new Date()
   };
+}
+
+/**
+ * Generate a playlist using songs from API (Google Sheets or JSON)
+ */
+export async function generatePlaylistFromAPI(queryYear: number, queryLocation: string, source: 'auto' | 'sheets' | 'json' = 'auto'): Promise<PlaylistResult> {
+  try {
+    const response = await fetch(`/api/songs?source=${source}`);
+    const data = await response.json();
+    
+    if (!data.success) {
+      throw new Error(data.error || 'Failed to fetch songs');
+    }
+    
+    return generatePlaylist(queryYear, queryLocation, data.songs);
+  } catch (error) {
+    console.error('Error fetching songs from API:', error);
+    // Fallback to static data
+    return generatePlaylist(queryYear, queryLocation);
+  }
 }
 
 /**

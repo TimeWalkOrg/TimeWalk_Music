@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Google Service Account keys (SECURITY CRITICAL)
+*service-account*.json
+google-credentials*.json
+
 # vercel
 .vercel
 

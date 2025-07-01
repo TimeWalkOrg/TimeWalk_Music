@@ -10,6 +10,8 @@ Generates music playlists for any year and location in history (e.g., "1664, New
 - 🧮 **Temporal Interpolation**: Smart algorithm weighs songs by historical proximity
 - 📍 **Location-Aware**: Considers cultural regions and historical context
 - 🎯 **Diverse Playlists**: Generates 10-song playlists with artist/genre diversity
+- 📊 **Google Sheets Integration**: Edit song database directly in Google Sheets
+- 🔄 **Bidirectional Sync**: Sync between local JSON and Google Sheets
 - 🎨 **Beautiful UI**: Modern, responsive design with Tailwind CSS
 - ⚡ **Fast**: Built with Next.js 14 and TypeScript
 
@@ -33,6 +35,20 @@ Generates music playlists for any year and location in history (e.g., "1664, New
 
 4. **Open in browser**
    Navigate to `http://localhost:3000`
+
+## 📊 Google Sheets Integration (Optional)
+
+Want to edit songs in a spreadsheet? Set up Google Sheets integration:
+
+1. **Follow the setup guide**: See [GOOGLE_SHEETS_SETUP.md](./GOOGLE_SHEETS_SETUP.md)
+2. **Quick setup commands**:
+   ```bash
+   npm run sync:setup      # Create sheet headers
+   npm run sync:to-sheets  # Sync JSON to Google Sheets
+   npm run sync:to-json    # Sync Google Sheets to JSON
+   npm run sync:status     # Check sync status
+   ```
+3. **Add songs via UI**: Click "Manage Songs" button in the app
 
 ## 🎮 Try These Examples
 
