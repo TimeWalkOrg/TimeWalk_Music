@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { generatePlaylist, parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
+import { generatePlaylist, generatePlaylistSync, parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
 
 export default function PlaylistGenerator() {
   const [input, setInput] = useState('');
   const [playlist, setPlaylist] = useState<PlaylistResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [useGoogleSheets, setUseGoogleSheets] = useState(false);
 
   const handleGenerate = async () => {
     if (!input.trim()) {
@@ -29,7 +30,12 @@ export default function PlaylistGenerator() {
       // Simulate a brief loading period for better UX
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      const result = generatePlaylist(parsed.year, parsed.location);
+      let result: PlaylistResult;
+      if (useGoogleSheets) {
+        result = await generatePlaylist(parsed.year, parsed.location, true);
+      } else {
+        result = generatePlaylistSync(parsed.year, parsed.location);
+      }
       setPlaylist(result);
     } catch {
       setError('Failed to generate playlist. Please try again.');
@@ -60,6 +66,17 @@ export default function PlaylistGenerator() {
           <label htmlFor="input" className="block text-sm font-medium text-gray-700">
             Enter Year and Location
           </label>
+          <div className="flex space-x-3 items-center mb-3">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={useGoogleSheets}
+                onChange={(e) => setUseGoogleSheets(e.target.checked)}
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Use Google Sheets data</span>
+            </label>
+          </div>
           <div className="flex space-x-3">
             <input
               id="input"

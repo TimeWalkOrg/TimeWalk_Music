@@ -131,6 +131,24 @@ Historical locations are mapped to cultural regions:
 
 Currently includes **25 carefully curated songs** spanning:
 
+### 📊 Google Sheets Integration
+
+The song database can now be managed via Google Sheets! This allows for easy editing, collaborative updates, and real-time synchronization.
+
+**Quick Setup:**
+```bash
+# Create a new Google Spreadsheet with your data
+npm run sync:create
+
+# Upload existing songs to Google Sheets
+npm run sync:upload
+
+# Download updates from Google Sheets
+npm run sync:download
+```
+
+📖 **[Complete Setup Guide](./GOOGLE_SHEETS_SETUP.md)**
+
 - **1660s**: Colonial/Baroque (Greensleeves, Barbara Allen)
 - **1770s**: Revolutionary War (Yankee Doodle, Liberty Song)
 - **1890s**: Victorian/Ragtime (Maple Leaf Rag, After the Ball)

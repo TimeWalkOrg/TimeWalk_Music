@@ -1,4 +1,5 @@
 import songsData from '@/data/songs.json';
+import { readSongsFromSheets } from './googleSheets';
 
 export interface Song {
   id: number;
@@ -132,7 +133,43 @@ function selectDiversePlaylist(weightedSongs: WeightedSong[], count: number): So
 /**
  * Generate a playlist based on year and location
  */
-export function generatePlaylist(queryYear: number, queryLocation: string): PlaylistResult {
+export async function generatePlaylist(queryYear: number, queryLocation: string, useGoogleSheets: boolean = false): Promise<PlaylistResult> {
+  let songs: Song[];
+  
+  if (useGoogleSheets && process.env.GOOGLE_SHEETS_ID) {
+    try {
+      songs = await readSongsFromSheets();
+      console.log(`Loaded ${songs.length} songs from Google Sheets`);
+    } catch (error) {
+      console.warn('Failed to load from Google Sheets, falling back to local data:', error);
+      songs = songsData;
+    }
+  } else {
+    songs = songsData;
+  }
+  
+  // Calculate weights for all songs
+  const weightedSongs: WeightedSong[] = songs.map(song => ({
+    ...song,
+    weight: calculateTemporalWeight(song.year, queryYear) * 
+            calculateLocationRelevance(song, queryLocation)
+  }));
+  
+  // Select diverse playlist
+  const playlistSongs = selectDiversePlaylist(weightedSongs, 10);
+  
+  return {
+    songs: playlistSongs,
+    queryYear,
+    queryLocation,
+    generatedAt: new Date()
+  };
+}
+
+/**
+ * Generate a playlist based on year and location (synchronous version using local data)
+ */
+export function generatePlaylistSync(queryYear: number, queryLocation: string): PlaylistResult {
   const songs: Song[] = songsData;
   
   // Calculate weights for all songs
