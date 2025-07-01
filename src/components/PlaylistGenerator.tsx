@@ -50,7 +50,7 @@ export default function PlaylistGenerator() {
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold text-white">Music TimeWalk</h1>
         <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-          Generate a historical playlist for any year and location. Experience the music of different eras and places.
+          Generate an historical-accurate playlist for any year and location.
         </p>
       </div>
 
