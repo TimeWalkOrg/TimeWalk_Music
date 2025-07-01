@@ -1,13 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { generatePlaylist, parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
+import { useState, useEffect } from 'react';
+import { generatePlaylistFromAPI, parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
+import SongManager from './SongManager';
 
 export default function PlaylistGenerator() {
   const [input, setInput] = useState('');
   const [playlist, setPlaylist] = useState<PlaylistResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [songs, setSongs] = useState<Song[]>([]);
 
   const handleGenerate = async () => {
     if (!input.trim()) {
@@ -29,7 +31,7 @@ export default function PlaylistGenerator() {
       // Simulate a brief loading period for better UX
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      const result = generatePlaylist(parsed.year, parsed.location);
+      const result = await generatePlaylistFromAPI(parsed.year, parsed.location);
       setPlaylist(result);
     } catch {
       setError('Failed to generate playlist. Please try again.');
@@ -140,6 +142,9 @@ export default function PlaylistGenerator() {
           </div>
         </div>
       )}
+
+      {/* Song Manager Component */}
+      <SongManager songs={songs} onSongsUpdate={setSongs} />
     </div>
   );
 }
