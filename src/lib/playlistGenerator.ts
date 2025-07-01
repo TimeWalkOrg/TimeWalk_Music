@@ -8,6 +8,9 @@ export interface Song {
   genre: string;
   cultural_region: string;
   historical_significance: string;
+  spotify_url?: string;
+  youtube_url?: string;
+  apple_music_url?: string;
 }
 
 export interface WeightedSong extends Song {

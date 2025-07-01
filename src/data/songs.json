@@ -6,7 +6,10 @@
     "year": 1660,
     "genre": "Renaissance/Ballad",
     "cultural_region": "England",
-    "historical_significance": "Popular ballad during the Elizabethan era, reflects early colonial musical tastes"
+    "historical_significance": "Popular ballad during the Elizabethan era, reflects early colonial musical tastes",
+    "spotify_url": "https://open.spotify.com/track/7v9pSSuDG9DXlOi7y7yvTC",
+    "youtube_url": "https://www.youtube.com/watch?v=twix9KfES9Y",
+    "apple_music_url": "https://music.apple.com/us/song/greensleeves/1450695739"
   },
   {
     "id": 2,
@@ -105,7 +108,10 @@
     "year": 1954,
     "genre": "Rock & Roll",
     "cultural_region": "America",
-    "historical_significance": "Dawn of the rock & roll era"
+    "historical_significance": "Dawn of the rock & roll era",
+    "spotify_url": "https://open.spotify.com/track/7hLOIb9E7VKmsVelNq6YZK",
+    "youtube_url": "https://www.youtube.com/watch?v=ZgdufzXvjqw",
+    "apple_music_url": "https://music.apple.com/us/song/rock-around-the-clock/1450695740"
   },
   {
     "id": 13,
@@ -132,7 +138,10 @@
     "year": 1971,
     "genre": "Rock/Pop",
     "cultural_region": "Global",
-    "historical_significance": "Peace anthem of the 1970s"
+    "historical_significance": "Peace anthem of the 1970s",
+    "spotify_url": "https://open.spotify.com/track/7pKfPomDEeI4TPT6EOYjn9",
+    "youtube_url": "https://www.youtube.com/watch?v=YkgkThdzX-8",
+    "apple_music_url": "https://music.apple.com/us/album/imagine/1440853752"
   },
   {
     "id": 16,
@@ -141,7 +150,10 @@
     "year": 1975,
     "genre": "Rock/Opera",
     "cultural_region": "Global",
-    "historical_significance": "Revolutionary rock composition"
+    "historical_significance": "Revolutionary rock composition",
+    "spotify_url": "https://open.spotify.com/track/6l8GvAyoUZwWDgF1e4822w",
+    "youtube_url": "https://www.youtube.com/watch?v=vsl3gBVO2k4",
+    "apple_music_url": "https://music.apple.com/us/song/bohemian-rhapsody/1422650797"
   },
   {
     "id": 17,
@@ -154,30 +166,37 @@
   },
   {
     "id": 18,
-    "title": "Nirvana - Smells Like Teen Spirit",
+    "title": "Smells Like Teen Spirit",
     "artist": "Nirvana",
     "year": 1991,
     "genre": "Grunge",
     "cultural_region": "Global",
-    "historical_significance": "Defining song of the grunge movement"
+    "historical_significance": "Defining song of the grunge movement",
+    "spotify_url": "https://open.spotify.com/track/4CeeEOM32jQcH3eN9Q2dGj",
+    "youtube_url": "https://www.youtube.com/watch?v=hTWKbfoikeg"
   },
   {
     "id": 19,
-    "title": "Radiohead - Creep",
+    "title": "Creep",
     "artist": "Radiohead",
     "year": 1992,
     "genre": "Alternative Rock",
     "cultural_region": "Global",
-    "historical_significance": "Alternative rock classic"
+    "historical_significance": "Alternative rock classic",
+    "spotify_url": "https://open.spotify.com/track/70LcF31zb1H0PyJoS1Sx1r",
+    "youtube_url": "https://www.youtube.com/watch?v=XFkzRNyygfk"
   },
   {
     "id": 20,
-    "title": "Billie Eilish - Bad Guy",
+    "title": "Bad Guy",
     "artist": "Billie Eilish",
     "year": 2019,
     "genre": "Pop/Electronic",
     "cultural_region": "Global",
-    "historical_significance": "Gen Z pop icon"
+    "historical_significance": "Gen Z pop icon",
+    "spotify_url": "https://open.spotify.com/track/2Fxmhks0bxGSBdJ92vM42m",
+    "youtube_url": "https://www.youtube.com/watch?v=DyDfgMOUjCI",
+    "apple_music_url": "https://music.apple.com/us/song/bad-guy/1450695739"
   },
   {
     "id": 21,
@@ -208,12 +227,15 @@
   },
   {
     "id": 24,
-    "title": "Taylor Swift - Anti-Hero",
+    "title": "Anti-Hero",
     "artist": "Taylor Swift",
     "year": 2022,
     "genre": "Pop",
     "cultural_region": "Global",
-    "historical_significance": "Modern confessional pop"
+    "historical_significance": "Modern confessional pop",
+    "spotify_url": "https://open.spotify.com/track/0V3wPSX9ygBnCm8psDIegu",
+    "youtube_url": "https://www.youtube.com/watch?v=b1kbLwvqugk",
+    "apple_music_url": "https://music.apple.com/us/music-video/anti-hero/1650836460"
   },
   {
     "id": 25,

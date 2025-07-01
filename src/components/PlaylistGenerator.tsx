@@ -144,7 +144,29 @@ export default function PlaylistGenerator() {
   );
 }
 
+// Helper function to get the best available music link
+function getMusicLink(song: Song): { url: string; platform: string } | null {
+  if (song.spotify_url) {
+    return { url: song.spotify_url, platform: 'Spotify' };
+  }
+  if (song.youtube_url) {
+    return { url: song.youtube_url, platform: 'YouTube' };
+  }
+  if (song.apple_music_url) {
+    return { url: song.apple_music_url, platform: 'Apple Music' };
+  }
+  return null;
+}
+
 function SongCard({ song, position }: { song: Song; position: number }) {
+  const musicLink = getMusicLink(song);
+  
+  const handleSongClick = () => {
+    if (musicLink) {
+      window.open(musicLink.url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
       <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
@@ -153,8 +175,21 @@ function SongCard({ song, position }: { song: Song; position: number }) {
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <h4 className="text-lg font-medium text-gray-900 truncate">
+            <h4 
+              className={`text-lg font-medium truncate ${
+                musicLink 
+                  ? 'text-blue-600 cursor-pointer hover:text-blue-800 hover:underline' 
+                  : 'text-gray-900'
+              }`}
+              onClick={musicLink ? handleSongClick : undefined}
+              title={musicLink ? `Play on ${musicLink.platform}` : song.title}
+            >
               {song.title}
+              {musicLink && (
+                <span className="ml-2 text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">
+                  ▶ {musicLink.platform}
+                </span>
+              )}
             </h4>
             <p className="text-sm text-gray-600">
               by {song.artist} • {song.year}
