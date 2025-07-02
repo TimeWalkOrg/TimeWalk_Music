@@ -1,5 +1,65 @@
 const { google } = require('googleapis');
 const { GoogleAuth } = require('google-auth-library');
+const fs = require('fs');
+const path = require('path');
+
+// Load environment variables from .env.local
+function loadEnvFile() {
+  const envPath = path.join(__dirname, '..', '.env.local');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const trimmedLine = line.trim();
+      if (trimmedLine && !trimmedLine.startsWith('#') && trimmedLine.includes('=')) {
+        const [key, ...valueParts] = trimmedLine.split('=');
+        let value = valueParts.join('=');
+        
+        // Remove outer quotes if present (handles both single and double quotes)
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1);
+        }
+        
+        // Additional cleanup for nested quotes that might remain
+        if (key.trim() === 'GOOGLE_SERVICE_ACCOUNT_KEY') {
+          // Ensure it starts with { and ends with }
+          value = value.trim();
+          if (!value.startsWith('{')) {
+            // Find the first { and last }
+            const startIndex = value.indexOf('{');
+            const endIndex = value.lastIndexOf('}');
+            if (startIndex !== -1 && endIndex !== -1) {
+              value = value.substring(startIndex, endIndex + 1);
+            }
+          }
+        }
+        
+        process.env[key.trim()] = value;
+      }
+    });
+    console.log('✅ Loaded environment variables from .env.local');
+    
+    // Debug: Check if the JSON key is loaded correctly
+    if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
+      const keyPreview = process.env.GOOGLE_SERVICE_ACCOUNT_KEY.substring(0, 50) + '...';
+      console.log(`📋 GOOGLE_SERVICE_ACCOUNT_KEY loaded (preview): ${keyPreview}`);
+      
+      // Test JSON parsing
+      try {
+        JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+        console.log('✅ JSON parsing test successful');
+      } catch (e) {
+        console.log(`❌ JSON parsing test failed: ${e.message}`);
+        console.log('First 100 chars of key:', process.env.GOOGLE_SERVICE_ACCOUNT_KEY.substring(0, 100));
+      }
+    }
+  } else {
+    console.log('⚠️  .env.local file not found');
+  }
+}
+
+// Load env variables before proceeding
+loadEnvFile();
 
 // Configuration
 const SPREADSHEET_ID = '1c88b1aT_Iufmc-tztfPMPFZeUVQ8J2BTXnLbAPnWkKA';

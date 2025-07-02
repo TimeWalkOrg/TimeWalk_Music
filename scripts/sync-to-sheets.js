@@ -3,6 +3,35 @@ const path = require('path');
 const { google } = require('googleapis');
 const { GoogleAuth } = require('google-auth-library');
 
+// Load environment variables from .env.local
+function loadEnvFile() {
+  const envPath = path.join(__dirname, '..', '.env.local');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const trimmedLine = line.trim();
+      if (trimmedLine && !trimmedLine.startsWith('#') && trimmedLine.includes('=')) {
+        const [key, ...valueParts] = trimmedLine.split('=');
+        let value = valueParts.join('=');
+        
+        // Remove quotes if present
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1);
+        }
+        
+        process.env[key.trim()] = value;
+      }
+    });
+    console.log('✅ Loaded environment variables from .env.local');
+  } else {
+    console.log('⚠️  .env.local file not found');
+  }
+}
+
+// Load env variables before proceeding
+loadEnvFile();
+
 // Configuration
 const SPREADSHEET_ID = '1c88b1aT_Iufmc-tztfPMPFZeUVQ8J2BTXnLbAPnWkKA';
 const RANGE = 'Sheet1!A:J';
