@@ -8,6 +8,7 @@ export default function PlaylistGenerator() {
   const [playlist, setPlaylist] = useState<PlaylistResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [syncLoading, setSyncLoading] = useState<string | null>(null);
 
   const handleGenerate = async () => {
     if (!input.trim()) {
@@ -41,6 +42,56 @@ export default function PlaylistGenerator() {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleGenerate();
+    }
+  };
+
+  const handleUpdateSpreadsheet = async () => {
+    setSyncLoading('update');
+    try {
+      const response = await fetch('/api/sync/to-sheets', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        alert(`Successfully updated spreadsheet with ${data.count} songs!`);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      alert('Failed to update spreadsheet. Please try again.');
+    } finally {
+      setSyncLoading(null);
+    }
+  };
+
+  const handleEditSpreadsheet = () => {
+    window.open('https://time-walk-music.vercel.app/', '_blank', 'noopener,noreferrer');
+  };
+
+  const handlePullFromSpreadsheet = async () => {
+    if (!confirm('This will replace all songs in the database with songs from the spreadsheet. Continue?')) {
+      return;
+    }
+    
+    setSyncLoading('pull');
+    try {
+      const response = await fetch('/api/sync/from-sheets', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        alert(`Successfully pulled ${data.count} songs from spreadsheet! Backup created: ${data.backup}`);
+        // Reload the page to reflect the new data
+        window.location.reload();
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      alert('Failed to pull from spreadsheet. Please try again.');
+    } finally {
+      setSyncLoading(null);
     }
   };
 
@@ -93,6 +144,31 @@ export default function PlaylistGenerator() {
           <p className="text-sm text-gray-500">
             Try: &ldquo;1664, New Amsterdam&rdquo;, &ldquo;1950 America&rdquo;, &ldquo;1890 London&rdquo;, or &ldquo;2020 Global&rdquo;
           </p>
+          
+          {/* Spreadsheet Management Buttons */}
+          <div className="flex flex-wrap gap-2 mt-3">
+            <button
+              onClick={handleUpdateSpreadsheet}
+              disabled={syncLoading !== null}
+              className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {syncLoading === 'update' ? 'Updating...' : 'Update Spreadsheet'}
+            </button>
+            <button
+              onClick={handleEditSpreadsheet}
+              disabled={syncLoading !== null}
+              className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Edit Spreadsheet
+            </button>
+            <button
+              onClick={handlePullFromSpreadsheet}
+              disabled={syncLoading !== null}
+              className="px-3 py-1 bg-orange-600 text-white text-sm rounded hover:bg-orange-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {syncLoading === 'pull' ? 'Pulling...' : 'Pull from Spreadsheet'}
+            </button>
+          </div>
         </div>
 
         {error && (
