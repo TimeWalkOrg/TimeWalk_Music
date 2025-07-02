@@ -80,10 +80,10 @@ export default function PlaylistGenerator() {
       const data = await response.json();
       
       if (data.success) {
-        const backupMessage = data.backup ? `Backup created: ${data.backup}` : 'No backup created (serverless environment)';
-        alert(`Successfully pulled ${data.count} songs from spreadsheet! ${backupMessage}`);
-        // Reload the page to reflect the new data
-        window.location.reload();
+        const noteMessage = data.note ? `\n\nNote: ${data.note}` : '';
+        alert(`Successfully pulled ${data.count} songs from spreadsheet!${noteMessage}`);
+        // Note: In serverless environment, the songs.json file won't be updated
+        // The application will continue to use the existing local data
       } else {
         alert(`Error: ${data.error}`);
       }
