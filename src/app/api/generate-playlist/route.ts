@@ -111,28 +111,52 @@ function selectDiversePlaylist(weightedSongs: WeightedSong[], count: number): So
  * Generate a playlist based on year and location using live data from Google Sheets
  */
 async function generatePlaylistFromSheets(queryYear: number, queryLocation: string): Promise<PlaylistResult> {
-  // Initialize Google Sheets service
-  const sheetsService = new GoogleSheetsService();
-  
-  // Pull songs from Google Sheets
-  const songs = await sheetsService.pullSongsFromSheets();
-  
-  // Calculate weights for all songs
-  const weightedSongs: WeightedSong[] = songs.map(song => ({
-    ...song,
-    weight: calculateTemporalWeight(song.year, queryYear) * 
-            calculateLocationRelevance(song, queryLocation)
-  }));
-  
-  // Select diverse playlist
-  const playlistSongs = selectDiversePlaylist(weightedSongs, 10);
-  
-  return {
-    songs: playlistSongs,
-    queryYear,
-    queryLocation,
-    generatedAt: new Date()
-  };
+  try {
+    // Initialize Google Sheets service
+    const sheetsService = new GoogleSheetsService();
+    
+    // Pull songs from Google Sheets
+    const songs = await sheetsService.pullSongsFromSheets();
+    
+    // Calculate weights for all songs
+    const weightedSongs: WeightedSong[] = songs.map(song => ({
+      ...song,
+      weight: calculateTemporalWeight(song.year, queryYear) * 
+              calculateLocationRelevance(song, queryLocation)
+    }));
+    
+    // Select diverse playlist
+    const playlistSongs = selectDiversePlaylist(weightedSongs, 10);
+    
+    return {
+      songs: playlistSongs,
+      queryYear,
+      queryLocation,
+      generatedAt: new Date()
+    };
+  } catch (error) {
+    console.error('Error fetching from Google Sheets, falling back to local data:', error);
+    
+    // Fallback to local data if Google Sheets is not available
+    const localSongs = await import('@/data/songs.json').then(module => module.default);
+    
+    // Calculate weights for all songs
+    const weightedSongs: WeightedSong[] = localSongs.map(song => ({
+      ...song,
+      weight: calculateTemporalWeight(song.year, queryYear) * 
+              calculateLocationRelevance(song, queryLocation)
+    }));
+    
+    // Select diverse playlist
+    const playlistSongs = selectDiversePlaylist(weightedSongs, 10);
+    
+    return {
+      songs: playlistSongs,
+      queryYear,
+      queryLocation,
+      generatedAt: new Date()
+    };
+  }
 }
 
 export async function POST(request: Request) {
@@ -160,10 +184,22 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error generating playlist:', error);
     
+    // Try to provide a more helpful error message
+    let errorMessage = 'Unknown error occurred';
+    if (error instanceof Error) {
+      if (error.message.includes('authentication') || error.message.includes('credentials')) {
+        errorMessage = 'Google Sheets authentication error. Using local data instead.';
+      } else if (error.message.includes('network') || error.message.includes('fetch')) {
+        errorMessage = 'Network error. Using local data instead.';
+      } else {
+        errorMessage = error.message;
+      }
+    }
+    
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: errorMessage
       },
       { status: 500 }
     );

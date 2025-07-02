@@ -39,7 +39,16 @@ export default function PlaylistGenerator() {
         }),
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        throw new Error('Invalid response from server');
+      }
       
       if (data.success) {
         setPlaylist(data.playlist);
