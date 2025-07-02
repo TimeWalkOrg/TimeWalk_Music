@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import GoogleSheetsService from '@/lib/googleSheets';
 import fs from 'fs';
 import path from 'path';
