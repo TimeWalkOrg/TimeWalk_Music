@@ -65,9 +65,7 @@ export default function PlaylistGenerator() {
     }
   };
 
-  const handleEditSpreadsheet = () => {
-    window.open('https://time-walk-music.vercel.app/', '_blank', 'noopener,noreferrer');
-  };
+
 
   const handlePullFromSpreadsheet = async () => {
     if (!confirm('This will replace all songs in the database with songs from the spreadsheet. Continue?')) {
@@ -82,7 +80,8 @@ export default function PlaylistGenerator() {
       const data = await response.json();
       
       if (data.success) {
-        alert(`Successfully pulled ${data.count} songs from spreadsheet! Backup created: ${data.backup}`);
+        const backupMessage = data.backup ? `Backup created: ${data.backup}` : 'No backup created (serverless environment)';
+        alert(`Successfully pulled ${data.count} songs from spreadsheet! ${backupMessage}`);
         // Reload the page to reflect the new data
         window.location.reload();
       } else {
@@ -153,13 +152,6 @@ export default function PlaylistGenerator() {
               className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {syncLoading === 'update' ? 'Updating...' : 'Update Spreadsheet'}
-            </button>
-            <button
-              onClick={handleEditSpreadsheet}
-              disabled={syncLoading !== null}
-              className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Edit Spreadsheet
             </button>
             <button
               onClick={handlePullFromSpreadsheet}
