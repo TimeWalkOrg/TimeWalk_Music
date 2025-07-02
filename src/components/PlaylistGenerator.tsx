@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { generatePlaylist, parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
+import { parseInput, PlaylistResult, Song } from '@/lib/playlistGenerator';
 
 export default function PlaylistGenerator() {
   const [input, setInput] = useState('');
@@ -27,11 +27,25 @@ export default function PlaylistGenerator() {
         return;
       }
 
-      // Simulate a brief loading period for better UX
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Call the API to generate playlist using live data from Google Sheets
+      const response = await fetch('/api/generate-playlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          year: parsed.year,
+          location: parsed.location
+        }),
+      });
 
-      const result = generatePlaylist(parsed.year, parsed.location);
-      setPlaylist(result);
+      const data = await response.json();
+      
+      if (data.success) {
+        setPlaylist(data.playlist);
+      } else {
+        setError(data.error || 'Failed to generate playlist. Please try again.');
+      }
     } catch {
       setError('Failed to generate playlist. Please try again.');
     } finally {
