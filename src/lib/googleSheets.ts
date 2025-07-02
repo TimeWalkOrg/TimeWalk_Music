@@ -1,6 +1,5 @@
 import { google } from 'googleapis';
 import { GoogleAuth } from 'google-auth-library';
-import { sheets_v4 } from 'googleapis';
 
 // Configuration
 const SPREADSHEET_ID = '1c88b1aT_Iufmc-tztfPMPFZeUVQ8J2BTXnLbAPnWkKA';
