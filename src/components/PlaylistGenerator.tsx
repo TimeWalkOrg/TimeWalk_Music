@@ -58,7 +58,7 @@ export default function PlaylistGenerator() {
       } else {
         alert(`Error: ${data.error}`);
       }
-    } catch (error) {
+    } catch {
       alert('Failed to update spreadsheet. Please try again.');
     } finally {
       setSyncLoading(null);
@@ -88,7 +88,7 @@ export default function PlaylistGenerator() {
       } else {
         alert(`Error: ${data.error}`);
       }
-    } catch (error) {
+    } catch {
       alert('Failed to pull from spreadsheet. Please try again.');
     } finally {
       setSyncLoading(null);

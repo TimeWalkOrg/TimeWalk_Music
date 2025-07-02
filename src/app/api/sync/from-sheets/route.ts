@@ -3,7 +3,7 @@ import GoogleSheetsService from '@/lib/googleSheets';
 import fs from 'fs';
 import path from 'path';
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Initialize Google Sheets service
     const sheetsService = new GoogleSheetsService();

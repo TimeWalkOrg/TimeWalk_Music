@@ -135,8 +135,8 @@ class GoogleSheetsService {
 
       // Skip header row and convert to songs
       const songs = rows.slice(1)
-        .filter((row: any[]) => row[0] && row[1]) // Filter out empty rows
-        .map((row: any[]) => this.rowToSong(row));
+        .filter((row: unknown[]) => Array.isArray(row) && row[0] && row[1]) // Filter out empty rows
+        .map((row: unknown[]) => this.rowToSong(row as (string | number)[]));
 
       console.log(`Successfully pulled ${songs.length} songs from Google Sheets`);
       return songs;

@@ -3,7 +3,7 @@ import GoogleSheetsService from '@/lib/googleSheets';
 import fs from 'fs';
 import path from 'path';
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Read songs from JSON file
     const songsPath = path.join(process.cwd(), 'src', 'data', 'songs.json');
