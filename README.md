@@ -1,4 +1,4 @@
-# ChronoTunes - Temporal Music Playlist Generator
+# TimeWalk Music - Temporal Music Playlist Generator
 
 > **Live Demo**: Coming soon! 🚀
 
