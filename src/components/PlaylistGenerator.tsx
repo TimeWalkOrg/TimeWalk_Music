@@ -225,12 +225,12 @@ export default function PlaylistGenerator() {
           <h3 className="text-lg font-medium text-gray-900 mb-4">Try these examples:</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              '1664, New Amsterdam',
-              '1776, America',
-              '1890, London',
-              '1930, New York',
-              '1950, America',
-              '2020, Global'
+              '1664 - New Amsterdam',
+              '1776 - America',
+              '1890 - London',
+              '1930 - New York',
+              '1950 - America',
+              '2020 - Global'
             ].map((example) => (
               <button
                 key={example}
